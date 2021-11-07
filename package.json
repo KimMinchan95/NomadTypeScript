@@ -4,8 +4,7 @@
   "description": "Learning Typescript by making a Blockchain with it",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "prestart": "tsc"
+    "start": "npx tsc-watch --onSuccess \" node dist/index.js\" "
   },
   "repository": {
     "type": "git",
@@ -16,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/KimMinchan95/NomadTypeScript/issues"
   },
-  "homepage": "https://github.com/KimMinchan95/NomadTypeScript#readme"
+  "homepage": "https://github.com/KimMinchan95/NomadTypeScript#readme",
+  "devDependencies": {
+    "tsc-watch": "^4.5.0"
+  },
+  "dependencies": {
+    "typescript": "^4.4.4"
+  }
 }
