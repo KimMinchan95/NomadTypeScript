@@ -1,6 +1,6 @@
 # NomadTypeScript
 
-노마드코더 TypeScript로 블록체인 만들기 공부 레포지토리
+노마드코더 TypeScript로 공부 레포지토리
 
 ###진행상황 
 

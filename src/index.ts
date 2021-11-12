@@ -1,4 +1,4 @@
-import * as CryptoJS from "crypto-js";
+import * as CryptoJS from 'crypto-js';
 
 class Block {
   static calculateBlockHash = (
@@ -37,7 +37,7 @@ class Block {
   }
 }
 
-const genesisBlcok: Block = new Block(0, "1323124", "", "Hello", 123456);
+const genesisBlcok: Block = new Block(0, '1323124', '', 'Hello', 123456);
 
 let blockchain: Block[] = [genesisBlcok];
 
@@ -57,22 +57,44 @@ const createNewBlock = (data: string): Block => {
     newTimestamp,
     data
   );
-  const newBlock: Block = new Block(newIndex, newHash, previousBlock.hash, data, newTimestamp);
+
+  const newBlock: Block = new Block(
+    newIndex,
+    newHash,
+    previousBlock.hash,
+    data,
+    newTimestamp
+  );
 
   return newBlock;
 };
 
-const isBlockValid = (
-  candidateBlock: Block,
-  previousBlock: Block
-): boolean => {
+const getHashforBlock = (aBlock: Block): string =>
+  Block.calculateBlockHash(
+    aBlock.index,
+    aBlock.previousHash,
+    aBlock.timestamp,
+    aBlock.data
+  );
+
+const isBlockValid = (candidateBlock: Block, previousBlock: Block): boolean => {
   if (Block.validateStructure(candidateBlock)) {
     return false;
   } else if (previousBlock.index + 1 !== candidateBlock.index) {
     return false;
   } else if (previousBlock.hash !== candidateBlock.previousHash) {
     return false;
+  } else if (getHashforBlock(candidateBlock) !== candidateBlock.hash) {
+    return false;
+  } else {
+    return true;
   }
 };
 
-export { };
+const addBlcok = (candidateBlock: Block): void => {
+  if (isBlockValid(candidateBlock, getLatestBlock())) {
+    blockchain.push(candidateBlock);
+  }
+};
+
+export {};
